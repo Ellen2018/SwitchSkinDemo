@@ -17,8 +17,7 @@ public class SkinActivityLifecycle implements Application.ActivityLifecycleCallb
     @SuppressLint("SoonBlockedPrivateApi")
     public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle bundle) {
         LayoutInflater layoutInflater = LayoutInflater.from(activity);
-        SkinLayoutFactory skinLayoutFactory = new SkinLayoutFactory();
-        //反射mFactorySet,Android Q及以上已经失效
+        //反射mFactorySet,Android Q及以上已经失效-> 报not field 异常
         //Android Q以上setFactory2问题
         //http://www.javashuo.com/article/p-sheppkca-ds.html
         forceSetFactory2(layoutInflater);
@@ -39,6 +38,7 @@ public class SkinActivityLifecycle implements Application.ActivityLifecycleCallb
             mFactory.setAccessible(true);
             Field mFactory2 = inflaterClass.getDeclaredField("mFactory2");
             mFactory2.setAccessible(true);
+            //自定义的Factory2
             SkinLayoutFactory skinLayoutFactory = new SkinLayoutFactory();
             mFactory2.set(inflater, skinLayoutFactory);
             mFactory.set(inflater, skinLayoutFactory);

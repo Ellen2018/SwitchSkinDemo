@@ -9,15 +9,17 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/bt_skin_1"
             android:layout_width="wrap_content"
             android:layout_height="?actionBarSize"
-            android:gravity="left|center_vertical"
+            android:gravity="start|center_vertical"
             android:text="皮肤一" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="?actionBarSize"
-            android:gravity="left|center_vertical"
+            android:background="#ff0000"
+            android:gravity="start|center_vertical"
             android:text="皮肤二" />
 
     </LinearLayout>
