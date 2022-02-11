@@ -1,5 +1,6 @@
 package com.yalemang.switchskindemo.skin;
 
+import android.app.Application;
 import android.view.LayoutInflater;
 
 import com.yalemang.switchskindemo.App;
@@ -7,7 +8,7 @@ import com.yalemang.switchskindemo.App;
 public class SkinManager {
 
     private volatile static SkinManager INSTANCE;
-    private App app;
+    private Application application;
 
     private SkinManager(){}
 
@@ -23,8 +24,12 @@ public class SkinManager {
         return INSTANCE;
     }
 
-    public void initApp(App app){
-        this.app = app;
+    public Application getApplication(){
+        return application;
+    }
+
+    public void initApp(Application app){
+        this.application = app;
         //步骤一
         LayoutInflater layoutInflater = LayoutInflater.from(app);
         //步骤二

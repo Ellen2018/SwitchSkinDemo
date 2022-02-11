@@ -14,6 +14,12 @@ import java.util.HashMap;
 
 public class SkinLayoutFactory implements LayoutInflater.Factory2 {
 
+    private SkinAttribute skinAttribute;
+
+    public SkinLayoutFactory(){
+        skinAttribute = new SkinAttribute();
+    }
+
     //系统自带的控件名包名路径
     private static final String[] systemViewPackage = {
             "androidx.widget.",
@@ -34,6 +40,8 @@ public class SkinLayoutFactory implements LayoutInflater.Factory2 {
         if(view == null){
             view = onCreateView(name, context, attributeSet);
         }
+        //筛选符合属性的View
+        skinAttribute.loadView(view,attributeSet);
         return view;
     }
 
