@@ -49,18 +49,26 @@ public class SkinAttribute {
                    Log.d("Ellen2018","resId = "+ resId);
 
                    //拿到空壳App资源
-                   File skinFile = new File(view.getContext().getCacheDir(),"skin_test_blue.apk");
-                   if(!skinFile.exists()){
-                       //复制文件
-                       FileUtils.copyFileFromAssets(view.getContext(), "skin_test_blue.apk",
-                               view.getContext().getCacheDir().getAbsolutePath(), "skin_test_blue.apk");
-                   }
-                   SkinLoadApkPath skinLoadApkPath = new SkinLoadApkPath();
-                   skinLoadApkPath.loadEmptyApkPath(skinFile.getAbsolutePath());
-                   Resources skinResource = skinLoadApkPath.getSkinResource();
-                   if(attributeName.equals("textColor")){
-                       TextView textView = (TextView) view;
-                       textView.setTextColor(skinResource.getColorStateList(resId));
+                   if(!SkinManager.getInstance().isDefaultSkin()){
+                       String skinName = SkinManager.getInstance().getCurrentSkin();
+                       File skinFile = new File(view.getContext().getCacheDir(),skinName);
+                       //如果皮肤包不存在，那么先从asset里进行拷贝到SD卡【模拟从服务器下载过程】
+                       if(!skinFile.exists()){
+                           //复制文件
+                           FileUtils.copyFileFromAssets(view.getContext(), skinName,
+                                   view.getContext().getCacheDir().getAbsolutePath(), skinName);
+                       }
+                       Log.d("Ellen2018","皮肤资源包是否存在:"+skinFile.exists());
+                       SkinLoadApkPath skinLoadApkPath = new SkinLoadApkPath();
+                       skinLoadApkPath.loadEmptyApkPath(skinFile.getAbsolutePath());
+                       Resources skinResource = skinLoadApkPath.getSkinResource();
+                       if(attributeName.equals("textColor")){
+                           TextView textView = (TextView) view;
+                           textView.setTextColor(skinResource.getColorStateList(resId));
+                       }
+                   }else {
+                       //默认皮肤
+                       Log.d("Ellen2018","加载默认皮肤");
                    }
                }
            }

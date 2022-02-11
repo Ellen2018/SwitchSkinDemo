@@ -12,6 +12,8 @@
             android:id="@+id/bt_skin_1"
             android:layout_width="wrap_content"
             android:layout_height="?actionBarSize"
+            android:textColor="@color/main_color"
+            android:background="@null"
             android:gravity="start|center_vertical"
             android:text="皮肤一" />
 

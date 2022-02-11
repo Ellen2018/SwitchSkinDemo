@@ -3,19 +3,27 @@ package com.yalemang.switchskindemo.skin;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.view.LayoutInflaterCompat;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SkinActivityLifecycle implements Application.ActivityLifecycleCallbacks {
+
+    private List<Activity> activeActivityList = new ArrayList<>();
+
     @Override
     @SuppressLint("SoonBlockedPrivateApi")
     public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle bundle) {
+        activeActivityList.add(activity);
         LayoutInflater layoutInflater = LayoutInflater.from(activity);
         //反射mFactorySet,Android Q及以上已经失效-> 报not field 异常
         //Android Q以上setFactory2问题
@@ -76,6 +84,13 @@ public class SkinActivityLifecycle implements Application.ActivityLifecycleCallb
 
     @Override
     public void onActivityDestroyed(@NonNull Activity activity) {
+       activeActivityList.remove(activity);
+    }
 
+    public void switchSkin(){
+        for(Activity activity:activeActivityList){
+            //重新使用资源
+            activity.recreate();
+        }
     }
 }
