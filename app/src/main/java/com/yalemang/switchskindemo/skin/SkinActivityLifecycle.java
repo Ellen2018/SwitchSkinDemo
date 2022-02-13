@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 
 import androidx.annotation.NonNull;
@@ -91,6 +92,7 @@ public class SkinActivityLifecycle implements Application.ActivityLifecycleCallb
         for(Activity activity:activeActivityList){
             //重新使用资源
             activity.recreate();
+            Log.d("Ellen2018","换肤:"+activity.getClass().getName());
         }
     }
 }

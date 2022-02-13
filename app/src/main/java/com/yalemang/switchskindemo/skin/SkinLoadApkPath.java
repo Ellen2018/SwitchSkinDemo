@@ -2,6 +2,7 @@ package com.yalemang.switchskindemo.skin;
 
 import android.content.res.AssetManager;
 import android.content.res.Resources;
+import android.util.Log;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -26,20 +27,16 @@ public class SkinLoadApkPath {
             addAssetPath.invoke(assetManager, apkPath);
 
             Resources appResources = SkinManager.getInstance().getApplication().getResources();
-            skinResources = new Resources(assetManager,
-                    appResources.getDisplayMetrics(), appResources.getConfiguration());
-
-            //skinResources就是我们替换的皮肤包Resources
-
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
+            if(SkinManager.getInstance().isDefaultSkin()){
+                //使用默认资源
+                skinResources = appResources;
+            }else {
+                //使用空壳Apk资源
+                skinResources = new Resources(assetManager,
+                        appResources.getDisplayMetrics(), appResources.getConfiguration());
+            }
+        } catch (Exception e) {
+            Log.d("Ellen2018","发生异常");
         }
     }
-
 }

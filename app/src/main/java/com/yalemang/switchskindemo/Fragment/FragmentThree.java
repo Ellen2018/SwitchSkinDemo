@@ -15,19 +15,10 @@ import com.yalemang.switchskindemo.R;
 
 public class FragmentThree extends Fragment {
 
-    private Button btSkin1;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_three,container,false);
-        btSkin1 = view.findViewById(R.id.bt_skin_1);
-        btSkin1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(),"切换皮肤1",Toast.LENGTH_SHORT).show();
-            }
-        });
         return view;
     }
 }

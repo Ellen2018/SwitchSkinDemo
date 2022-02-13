@@ -14,18 +14,18 @@ public class SkinManager {
     private volatile static SkinManager INSTANCE;
     private Application application;
     private List<String> skinNames = new ArrayList<>();
-    private String currentSkin = "skin_test_default";
-    private static final String DEFAULT_SKIN_NAME = "skin_test_default";
+    private String currentSkin = "skin_default.apk";
+    private static final String DEFAULT_SKIN_NAME = "skin_default.apk";
     private SkinActivityLifecycle skinActivityLifecycle;
 
     private SkinManager(){
         //初始化皮肤数据，当然这里可以网络下载即可，但是为了方便
         //笔者就用assets目录copy到本地目录的方式模拟网络加载皮肤过程
-        skinNames.add("skin_test_blue.apk");
-        skinNames.add("skin_test_red.apk");
-        skinNames.add("skin_test_black.apk");
-        skinNames.add("skin_test_green.apk");
-        skinNames.add("skin_test_default.apk");
+        skinNames.add("skin_blue.apk");
+        skinNames.add("skin_red.apk");
+        skinNames.add("skin_black.apk");
+        skinNames.add("skin_green.apk");
+        skinNames.add("skin_default.apk");
     }
 
     public List<String> getSkinData(){
