@@ -29,7 +29,22 @@ public class SkinManagerActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view);
         tvSkinColor = findViewById(R.id.tv_skin_color);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(skinManagerAdapter = new SkinManagerAdapter(skinData));
+        skinManagerAdapter = new SkinManagerAdapter(skinData);
+        if(SkinManager.getInstance().getCurrentSkin().equals("skin_red.apk")){
+            //红色
+            skinManagerAdapter.setSelectColor(Color.RED);
+        }else if(SkinManager.getInstance().getCurrentSkin().equals("skin_blue.apk")){
+            skinManagerAdapter.setSelectColor(Color.BLUE);
+        }else if(SkinManager.getInstance().getCurrentSkin().equals("skin_green.apk")){
+            skinManagerAdapter.setSelectColor(Color.GREEN);
+        }else if(SkinManager.getInstance().getCurrentSkin().equals("skin_black.apk")){
+            skinManagerAdapter.setSelectColor(Color.BLACK);
+        }else {
+            //默认
+            skinManagerAdapter.setSelectColor(Color.parseColor("#FFA500"));
+        }
+        recyclerView.setAdapter(skinManagerAdapter);
+        skinManagerAdapter.notifyDataSetChanged();
         tvSkinColor.setBackgroundColor(skinManagerAdapter.getSelectColor());
         skinManagerAdapter.setItemClick(position -> {
              //切换皮肤

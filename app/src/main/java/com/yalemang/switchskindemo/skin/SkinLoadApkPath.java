@@ -22,15 +22,15 @@ public class SkinLoadApkPath {
      */
     public void loadEmptyApkPath(String apkPath) {
         try {
-            AssetManager assetManager = AssetManager.class.newInstance();
-            Method addAssetPath = assetManager.getClass().getMethod("addAssetPath", String.class);
-            addAssetPath.invoke(assetManager, apkPath);
-
             Resources appResources = SkinManager.getInstance().getApplication().getResources();
             if(SkinManager.getInstance().isDefaultSkin()){
                 //使用默认资源
                 skinResources = appResources;
             }else {
+                AssetManager assetManager = AssetManager.class.newInstance();
+                Method addAssetPath = assetManager.getClass().getMethod("addAssetPath", String.class);
+                addAssetPath.invoke(assetManager, apkPath);
+
                 //使用空壳Apk资源
                 skinResources = new Resources(assetManager,
                         appResources.getDisplayMetrics(), appResources.getConfiguration());
