@@ -39,6 +39,7 @@ public class SkinManager {
     public void switchSkin(String skinName){
         this.currentSkin = skinName;
         skinActivityLifecycle.switchSkin();
+
     }
 
     public boolean isDefaultSkin(){

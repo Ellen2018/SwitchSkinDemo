@@ -21,6 +21,7 @@ public class SkinManagerAdapter extends RecyclerView.Adapter<SkinManagerAdapter.
 
     private List<String> skinNameList;
     private ItemClick itemClick;
+    private int selectColor = Color.parseColor("#FFA500");
 
     public SkinManagerAdapter(List<String> skinNameList) {
         this.skinNameList = skinNameList;
@@ -28,6 +29,14 @@ public class SkinManagerAdapter extends RecyclerView.Adapter<SkinManagerAdapter.
 
     public void setItemClick(ItemClick itemClick) {
         this.itemClick = itemClick;
+    }
+
+    public void setSelectColor(int selectColor) {
+        this.selectColor = selectColor;
+    }
+
+    public int getSelectColor() {
+        return selectColor;
     }
 
     @NonNull
@@ -46,7 +55,7 @@ public class SkinManagerAdapter extends RecyclerView.Adapter<SkinManagerAdapter.
                 itemClick.click(position);
             }
         });
-
+        holder.ivSelect.setBackgroundColor(selectColor);
         //设置选中
         if(skinName.equals(SkinManager.getInstance().getCurrentSkin())){
             holder.ivSelect.setVisibility(View.VISIBLE);

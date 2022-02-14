@@ -13,6 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.view.LayoutInflaterCompat;
 
+import com.yalemang.switchskindemo.SkinManagerActivity;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -91,8 +93,10 @@ public class SkinActivityLifecycle implements Application.ActivityLifecycleCallb
     public void switchSkin(){
         for(Activity activity:activeActivityList){
             //重新使用资源
-            activity.recreate();
-            Log.d("Ellen2018","换肤:"+activity.getClass().getName());
+            if(!(activity instanceof SkinManagerActivity)) {
+                activity.recreate();
+                Log.d("Ellen2018", "换肤:" + activity.getClass().getName());
+            }
         }
     }
 }
