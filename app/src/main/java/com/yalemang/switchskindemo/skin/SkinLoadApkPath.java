@@ -36,7 +36,7 @@ public class SkinLoadApkPath {
                         appResources.getDisplayMetrics(), appResources.getConfiguration());
             }
         } catch (Exception e) {
-            Log.d("Ellen2018","发生异常");
+            Log.d("Skin","发生异常");
         }
     }
 }

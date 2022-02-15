@@ -30,7 +30,6 @@ public class SwitchSkinActivity extends AppCompatActivity {
     private String[] titles = {"界面一", "界面二","界面三"};
     private ViewPager2 viewPager2;
     private List<Fragment> fragmentList;
-    private RelativeLayout rl;
     private PermissionUtils permissionUtils;
 
     @Override
@@ -55,7 +54,6 @@ public class SwitchSkinActivity extends AppCompatActivity {
     private void initView() {
         tabLayout = findViewById(R.id.tab_layout);
         viewPager2 = findViewById(R.id.view_pager_2);
-        rl = findViewById(R.id.rl);
 
         fragmentList = new ArrayList<>();
         fragmentList.add(new FragmentOne());
@@ -80,7 +78,6 @@ public class SwitchSkinActivity extends AppCompatActivity {
                 tab.setText(titles[position]);
             }
         });
-        //这句话很重要
         tabLayoutMediator.attach();
     }
 

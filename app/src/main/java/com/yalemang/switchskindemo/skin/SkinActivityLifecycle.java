@@ -28,7 +28,7 @@ public class SkinActivityLifecycle implements Application.ActivityLifecycleCallb
     public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle bundle) {
         activeActivityList.add(activity);
         LayoutInflater layoutInflater = LayoutInflater.from(activity);
-        //反射mFactorySet,Android Q及以上已经失效-> 报not field 异常
+        //反射setFactory2,Android Q及以上已经失效-> 报not field 异常
         //Android Q以上setFactory2问题
         //http://www.javashuo.com/article/p-sheppkca-ds.html
         forceSetFactory2(layoutInflater);
@@ -95,7 +95,6 @@ public class SkinActivityLifecycle implements Application.ActivityLifecycleCallb
             //重新使用资源
             if(!(activity instanceof SkinManagerActivity)) {
                 activity.recreate();
-                Log.d("Ellen2018", "换肤:" + activity.getClass().getName());
             }
         }
     }

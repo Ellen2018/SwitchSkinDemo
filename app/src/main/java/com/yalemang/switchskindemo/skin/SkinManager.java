@@ -9,13 +9,20 @@ import com.yalemang.switchskindemo.App;
 import java.util.ArrayList;
 import java.util.List;
 
+//皮肤管理类
 public class SkinManager {
 
+    //单例对象
     private volatile static SkinManager INSTANCE;
+    //Application对象
     private Application application;
+    //皮肤名字集合
     private List<String> skinNames = new ArrayList<>();
+    //记录当前应用的皮肤名
     private String currentSkin = "skin_default.apk";
+    //记录默认的皮肤名
     private static final String DEFAULT_SKIN_NAME = "skin_default.apk";
+    //应用Activity生命周期监听
     private SkinActivityLifecycle skinActivityLifecycle;
 
     private SkinManager(){
@@ -39,13 +46,20 @@ public class SkinManager {
     public void switchSkin(String skinName){
         this.currentSkin = skinName;
         skinActivityLifecycle.switchSkin();
-
     }
 
+    /**
+     * 是否是默认皮肤
+     * @return
+     */
     public boolean isDefaultSkin(){
         return currentSkin.equals(DEFAULT_SKIN_NAME);
     }
 
+    /**
+     * 获取到当前的皮肤名
+     * @return
+     */
     public String getCurrentSkin(){
         return currentSkin;
     }
@@ -66,11 +80,13 @@ public class SkinManager {
         return application;
     }
 
+    /**
+     * 皮肤管理初始化
+     * @param app
+     */
     public void initApp(Application app){
         this.application = app;
-        //步骤一
-        LayoutInflater layoutInflater = LayoutInflater.from(app);
-        //步骤二
+        //对所有Activity的声明周期进行监听
         app.registerActivityLifecycleCallbacks(skinActivityLifecycle = new SkinActivityLifecycle());
     }
 

@@ -19,6 +19,7 @@ import java.util.List;
 
 public class SkinAttribute {
 
+    //过滤出皮肤需要的属性
     private static final List<String> ATTRIBUTE = new ArrayList<>();
 
     static {
@@ -51,11 +52,6 @@ public class SkinAttribute {
                         resId = attrId;
                     }
                     if (resId != 0) {
-                        Log.d("Ellen2018", "view = " + view.getClass().getName());
-                        Log.d("Ellen2018", "attributeName = " + attributeName);
-                        Log.d("Ellen2018", "attributeValue = " + attributeValue);
-                        Log.d("Ellen2018", "resId = " + resId);
-
                         String skinName = SkinManager.getInstance().getCurrentSkin();
                         File skinFile = new File(view.getContext().getCacheDir(), skinName);
                         //拿到空壳App资源
@@ -66,7 +62,6 @@ public class SkinAttribute {
                                 FileUtils.copyFileFromAssets(view.getContext(), skinName,
                                         view.getContext().getCacheDir().getAbsolutePath(), skinName);
                             }
-                            Log.d("Ellen2018", "皮肤资源包是否存在:" + skinFile.exists());
                         }
                         SkinLoadApkPath skinLoadApkPath = new SkinLoadApkPath();
                         skinLoadApkPath.loadEmptyApkPath(skinFile.getAbsolutePath());

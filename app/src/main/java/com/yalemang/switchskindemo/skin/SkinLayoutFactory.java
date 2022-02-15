@@ -14,6 +14,7 @@ import java.util.HashMap;
 
 public class SkinLayoutFactory implements LayoutInflater.Factory2 {
 
+    //具体拦截逻辑都在该类里
     private SkinAttribute skinAttribute;
 
     public SkinLayoutFactory(){
@@ -21,6 +22,7 @@ public class SkinLayoutFactory implements LayoutInflater.Factory2 {
     }
 
     //系统自带的控件名包名路径
+    //因为布局中会直接使用<TextView没带全路径的，所以我们该手动加上
     private static final String[] systemViewPackage = {
             "androidx.widget.",
             "androidx.view.",
@@ -30,7 +32,9 @@ public class SkinLayoutFactory implements LayoutInflater.Factory2 {
             "android.webkit."
     };
 
+    //反射控件对应的构造器而使用
     private static final Class[] mConstructorSignature = new Class[]{Context.class,AttributeSet.class};
+    //存储控件的构造器，避免重复创建
     private static final HashMap<String, Constructor<? extends View>> mConstructor = new HashMap<>();
 
     @Nullable
@@ -46,6 +50,13 @@ public class SkinLayoutFactory implements LayoutInflater.Factory2 {
     }
 
 
+    /**
+     * 通过反射构建控件对象
+     * @param name
+     * @param context
+     * @param attributeSet
+     * @return
+     */
     @Nullable
     @Override
     public View onCreateView(@NonNull String name, @NonNull Context context, @NonNull AttributeSet attributeSet) {
@@ -76,7 +87,7 @@ public class SkinLayoutFactory implements LayoutInflater.Factory2 {
 
     private View onCreateViewFromTag(@NonNull String name, @NonNull Context context, @NonNull AttributeSet attributeSet){
         if(name.indexOf(".") > 0){
-
+           //说明XML中该控件带有包名全路径
         }
         View view = null;
         for(String packageName:systemViewPackage){
